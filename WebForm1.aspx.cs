@@ -22,17 +22,23 @@ namespace twitt2
             {
                 SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["dbconnect"].ConnectionString);
                 con.Open();
-                string insert = "insert into userinfo(username,rollno) values(@username,@rollno)";
+                string insert = "insert into userdet(username,email,phonenumber) values(@username,@email,@phonenumber)";
                 SqlCommand cmd = new SqlCommand(insert, con);
                 cmd.Parameters.AddWithValue("username", TextBox1.Text);
-                cmd.Parameters.AddWithValue("rollno", TextBox2.Text);
+                cmd.Parameters.AddWithValue("email", TextBox2.Text);
+                cmd.Parameters.AddWithValue("phonenumber", TextBox3.Text);
                 cmd.ExecuteNonQuery();
-                Response.Redirect("home.aspx");
+                Response.Redirect("tweet.aspx");
                 con.Close();
             }catch(Exception ex)
             {
                 Response.Write(ex);
             }
+        }
+
+        protected void TextBox2_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
